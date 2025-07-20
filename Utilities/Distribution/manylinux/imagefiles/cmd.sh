@@ -39,6 +39,7 @@ build_simpleitk() {
     rm -rf ${BLD_DIR} &&
     mkdir -p ${BLD_DIR} && cd ${BLD_DIR} &&
     cmake \
+        -DSimpleITK_USE_ELASTIX:BOOL=ON \
         -DSimpleITK_BUILD_DISTRIBUTE:BOOL=ON \
         -DSimpleITK_BUILD_STRIP:BOOL=ON \
         -DCMAKE_BUILD_TYPE:STRING=Release \
@@ -75,6 +76,7 @@ build_simpleitk_python() {
         -DSWIG_EXECUTABLE:FILEPATH=${BLD_DIR}/Swig/bin/swig \
         -DSWIG_DIR:PATH=${BLD_DIR}/Swig/ \
         -DSimpleITK_PYTHON_USE_LIMITED_API:BOOL=${USE_LIMITED_API:-OFF} \
+        -DSimpleITK_USE_ELASTIX:BOOL=ON \
         -DSimpleITK_BUILD_DISTRIBUTE:BOOL=ON \
         -DSimpleITK_BUILD_STRIP:BOOL=ON \
         -DSimpleITK_PYTHON_WHEEL:BOOL=ON \
@@ -101,6 +103,7 @@ if [[ ! -z ${BUILD_CSHARP:+x} && "${BUILD_CSHARP}" -ne 0 ]]; then
             -DCMAKE_BUILD_TYPE:STRING=Release \
             -DSWIG_EXECUTABLE:FILEPATH=${BLD_DIR}/Swig/bin/swig \
             -DSWIG_DIR:PATH=${BLD_DIR}/Swig/ \
+            -DSimpleITK_USE_ELASTIX:BOOL=ON \
             -DSimpleITK_CSHARP_ARCH:STRING="linux_$(arch)" \
             -DSimpleITK_BUILD_STRIP:BOOL=ON \
             ${SRC_DIR}/Wrapping/CSharp &&
@@ -119,6 +122,7 @@ if [[ ! -z ${BUILD_JAVA:+x} && "${BUILD_JAVA}" -ne 0 ]]; then
             -DCMAKE_BUILD_TYPE:STRING=Release \
             -DSWIG_EXECUTABLE:FILEPATH=${BLD_DIR}/Swig/bin/swig \
             -DSWIG_DIR:PATH=${BLD_DIR}/Swig/ \
+            -DSimpleITK_USE_ELASTIX:BOOL=ON \
             -DSimpleITK_JAVA_ARCH:STRING="linux_$(arch)" \
             -DSimpleITK_BUILD_STRIP:BOOL=ON \
             ${SRC_DIR}/Wrapping/Java &&
